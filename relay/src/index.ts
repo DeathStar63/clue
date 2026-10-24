@@ -12,6 +12,8 @@ import { cleanResult } from './validate';
 export interface Env {
   PROVIDER?: string;
   GEMINI_MODEL?: string;
+  /** Gemini 3.x thinking level: low (default here), medium or high. */
+  GEMINI_THINKING?: string;
   CLAUDE_MODEL?: string;
   ALLOWED_ORIGINS?: string;
   GEMINI_API_KEY?: string;
@@ -93,12 +95,14 @@ function json(body: unknown, status: number, origin: string | null): Response {
 
 async function extractWithGemini(text: string, env: Env): Promise<unknown> {
   if (!env.GEMINI_API_KEY) throw new RelayError(502, 'Relay is missing GEMINI_API_KEY');
-  const model = env.GEMINI_MODEL ?? 'gemini-3.8-flash';
+  const model = env.GEMINI_MODEL ?? 'gemini-3.5-flash-lite';
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`;
   const body = {
     systemInstruction: { parts: [{ text: SYSTEM }] },
     contents: [{ role: 'user', parts: [{ text }] }],
     generationConfig: {
+      // Picking ids from a fixed list needs little reasoning; default thinking made replies take 30–40 s.
+      thinkingConfig: { thinkingLevel: env.GEMINI_THINKING ?? 'low' },
       responseMimeType: 'application/json',
       responseSchema: {
         type: 'OBJECT',
