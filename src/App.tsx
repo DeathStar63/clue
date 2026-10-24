@@ -127,7 +127,7 @@ export default function App() {
           mindCount={mindCases.length}
           onNewSkin={() => {
             setSkin(newCase());
-            go({ name: 'safety' });
+            go({ name: 'describe' });
           }}
           onNewMind={() => {
             setMind(newMindCase());
@@ -173,7 +173,7 @@ export default function App() {
         return (
           <SafetyScreen
             {...step}
-            onBack={goHome}
+            onBack={() => go({ name: 'describe' })}
             onNext={() => go({ name: 'where' })}
             onAlarm={() => go({ name: 'emergency', then: { name: 'where' } })}
           />
@@ -187,15 +187,15 @@ export default function App() {
           />
         );
       case 'where':
-        return <WhereScreen {...step} onBack={() => go({ name: 'safety' })} onNext={() => go({ name: 'describe' })} />;
+        return <WhereScreen {...step} onBack={() => go({ name: 'safety' })} onNext={() => go({ name: 'questions' })} />;
       case 'describe':
-        return <DescribeScreen {...step} onBack={() => go({ name: 'where' })} onNext={() => go({ name: 'questions' })} />;
+        return <DescribeScreen {...step} onBack={goHome} onNext={() => go({ name: 'safety' })} />;
       case 'questions':
         return (
           <QuestionsScreen
             {...step}
             ranked={ranked}
-            onBack={() => go({ name: 'describe' })}
+            onBack={() => go({ name: 'where' })}
             onNext={() => go({ name: 'photos' })}
             onAlarm={() => go({ name: 'emergency', then: { name: 'questions' } })}
           />

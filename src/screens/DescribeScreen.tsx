@@ -46,7 +46,7 @@ export function DescribeScreen({ state, update, onNext, onBack }: DescribeScreen
 
   return (
     <Screen
-      title="Tell us in your own words"
+      title="What’s bothering you?"
       onBack={onBack}
       footer={
         <Button full onClick={next}>
@@ -54,7 +54,7 @@ export function DescribeScreen({ state, update, onNext, onBack }: DescribeScreen
         </Button>
       }
     >
-      <p className="sa-lead">What does it look and feel like? When did it start? Anything that makes it better or worse?</p>
+      <p className="sa-lead">Tell us in your own words. Where is it, what does it look and feel like, when did it start, and what makes it better or worse?</p>
       <textarea
         className="sa-textarea"
         rows={6}
@@ -96,7 +96,7 @@ export function DescribeScreen({ state, update, onNext, onBack }: DescribeScreen
           <p className="sa-muted">Tap × on anything we got wrong.</p>
         </section>
       )}
-      {!hasPicks && <p className="sa-muted">Not sure what to write? You can skip this — we’ll ask simple questions next.</p>}
+      {!hasPicks && <p className="sa-muted">Not sure what to write? You can skip this. Next we’ll do a quick safety check, then ask simple questions.</p>}
     </Screen>
   );
 }
