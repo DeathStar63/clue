@@ -26,6 +26,9 @@ jobs:
       - run: npm ci
       - run: npx vitest run
       - run: npm run build
+        env:
+          # Address of the AI relay (set in repo Settings → Variables). Empty = AI option hidden.
+          VITE_AI_URL: ${{ vars.VITE_AI_URL }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

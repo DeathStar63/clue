@@ -1,0 +1,12 @@
+name = "clue-relay"
+main = "src/index.ts"
+compatibility_date = "2026-10-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Plain settings. The API keys are NOT here: they are secrets you set with
+# `npx wrangler secret put GEMINI_API_KEY` / `npx wrangler secret put ANTHROPIC_API_KEY`.
+[vars]
+PROVIDER = "gemini" # "gemini" or "claude"
+GEMINI_MODEL = "gemini-3.8-flash"
+CLAUDE_MODEL = "claude-opus-5-5"
+ALLOWED_ORIGINS = "https://deathstar63.github.io,http://localhost:5174"

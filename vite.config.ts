@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
@@ -5,4 +6,6 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   base: './',
   plugins: [react()],
+  // The AI relay (relay/) is a separate Cloudflare Worker with its own tests.
+  test: { exclude: ['relay/**', 'node_modules/**'] },
 })

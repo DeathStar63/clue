@@ -25,3 +25,7 @@ dist-ssr
 
 # Local tool settings
 .claude/
+
+# Local secrets for the relay (wrangler dev)
+relay/.dev.vars
+.dev.vars
