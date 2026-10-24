@@ -1,0 +1,140 @@
+.ui-bodymap {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--s-4);
+}
+
+/* Segmented control */
+.ui-seg {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-self: center;
+  width: min(240px, 100%);
+  padding: 3px;
+  border-radius: var(--r-pill);
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+}
+
+.ui-seg__btn {
+  position: relative;
+  z-index: 1;
+  min-height: 38px;
+  border-radius: var(--r-pill);
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: var(--text-2);
+  transition: color var(--dur) ease;
+}
+
+.ui-seg__btn.is-active {
+  color: var(--on-accent);
+}
+
+.ui-seg__thumb {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: 3px;
+  width: calc(50% - 3px);
+  border-radius: var(--r-pill);
+  background: var(--accent);
+  transition: transform var(--dur) var(--ease-spring);
+}
+
+.ui-seg__thumb.is-right {
+  transform: translateX(100%);
+}
+
+/* Figure */
+.ui-bodymap__figure {
+  width: 100%;
+  max-width: 260px;
+  height: auto;
+  max-height: 62vh;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+.ui-bodymap__figure {
+  --bm-fill: var(--surface-raised);
+  --bm-hover: var(--surface-pressed);
+  --bm-line: color-mix(in srgb, var(--bg) 55%, var(--surface-raised));
+}
+
+.ui-bodymap__base path {
+  fill: var(--bm-fill);
+  pointer-events: none;
+}
+
+.ui-bodymap__detail {
+  fill: none;
+  stroke: var(--bm-line);
+  stroke-width: 1;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+
+.ui-bodymap__region {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: filter var(--dur) ease;
+}
+
+.ui-bodymap__region path {
+  fill: var(--bm-fill);
+  stroke: var(--bm-line);
+  stroke-width: 1;
+  stroke-linejoin: round;
+  transition: fill var(--dur) ease;
+}
+
+@media (hover: hover) {
+  .ui-bodymap__region:hover path {
+    fill: var(--bm-hover);
+  }
+}
+
+.ui-bodymap__region:active path {
+  fill: color-mix(in srgb, var(--accent) 35%, var(--bm-fill));
+}
+
+.ui-bodymap__region.is-on {
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--accent) 55%, transparent));
+}
+
+.ui-bodymap__region.is-on path {
+  fill: var(--accent);
+  stroke: color-mix(in srgb, var(--on-accent) 18%, var(--accent));
+}
+
+.ui-bodymap__region:focus {
+  outline: none;
+}
+
+.ui-bodymap__region:focus-visible path {
+  stroke: var(--focus);
+  stroke-width: 2.5;
+}
+
+@media (prefers-color-scheme: light) {
+  .ui-bodymap__figure {
+    --bm-fill: #e3e3e8;
+    --bm-hover: #d6d6dc;
+    --bm-line: #f4f4f6;
+  }
+}
+
+.ui-bodymap__small {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.ui-bodymap__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+}
